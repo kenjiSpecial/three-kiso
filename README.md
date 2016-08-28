@@ -3,5 +3,5 @@
 ## Install
 
 ```
-npm install kenjiSpecial/three-kiso -S
+npm install three-kiso -S
 ```
