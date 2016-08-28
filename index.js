@@ -4,11 +4,11 @@ var THREE = require('three');
 var size = require('size');
 var OrbitControl = require('three-orbit-controls')(THREE);
 var _ = require('underscore');
-var TweenMax = require('gsap');
+var raf = require('raf');
 
 export default class ThreeKiso {
     constructor(params){
-        _.bindAll(this, "onKeyDown");
+        _.bindAll(this, "onKeyDown", "tick");
 
         this.objects = {};
         this.updateCallbacks = [];
@@ -99,16 +99,20 @@ export default class ThreeKiso {
     start (){
         this.isUpdate = true;
         this.clock.start();
-        TweenMax.ticker.addEventListener("tick", this.tick, this);
+        // TweenMax.ticker.addEventListener("tick", this.tick, this);
+        this.tickId = raf(this.tick);
     }
     stop(){
         this.isUpdate = false;
         this.clock.stop();
-        TweenMax.ticker.removeEventListener("tick", this.tick, this);
+
+        raf.cancel(this.tickId);
     }
     tick(){
         this.update()
         this.renderer.render(this.scene, this.camera);
+
+        this.tickId = raf(this.tick);
     }
     update(){
         var dt = this.clock.getDelta();
