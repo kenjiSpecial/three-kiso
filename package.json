@@ -2,6 +2,10 @@
   "name": "three-kiso",
   "description": "the three base class written in es6",
   "version": "0.0.1",
+  "main" : "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "budo ./example/main.js:bundle.js --base /example/index.html --dir example --live -- -t [babelify --presets es2015]"
   },
@@ -18,5 +22,10 @@
     "domready": "^1.0.8",
     "raf": "^3.3.0",
     "three": "^0.80.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kenjiSpecial/three-kiso.git"
+  },
+  "license": "MIT",
 }
